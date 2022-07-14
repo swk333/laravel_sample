@@ -5,8 +5,17 @@
  */
 
 require('./bootstrap');
+import Navigation from './components/Navigation.vue';
+import Listings from './components/Listings.vue';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Listing from './components/Listing.vue';
 
 window.Vue = require('vue').default;
+
+Vue.use(VueRouter);
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +29,9 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('navigation', Navigation);
+Vue.component('listings', Listings);
+Vue.component('listing', Listing);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +39,23 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+ const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/listings',
+            name: 'listings',
+            component: Listings,
+        },
+        {
+            path: '/listings/:id',
+            name: 'listings.show',
+            component: Listing,
+        },
+    ]
+})
+
 const app = new Vue({
     el: '#app',
+    router
 });

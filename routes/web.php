@@ -14,23 +14,23 @@ use App\Models\Listing;
 |
 */
 
-Route::get('/', function () {
-    return view('listings', [
-        'heading' => 'Latest Listings',
-        'listings' => Listing::all()
-    ]);
-});
+// Route::get('/', function () {
+//     return view('listings', [
+//         'heading' => 'Latest Listings',
+//         'listings' => Listing::all()
+//     ]);
+// });
 
-// Single Listing
-Route::get('listing/{listing}', function(Listing $listing) {
-    return view('listing', [
-        'listing' => $listing
-    ]);
-});
+// // Single Listing
+// Route::get('listing/{listing}', function(Listing $listing) {
+//     return view('listing', [
+//         'listing' => $listing
+//     ]);
+// });
 
-Route::get('/sample', function () {
-    return view('sample');
-});
+// Route::get('/sample', function () {
+//     return view('sample');
+// });
 
 // Route::get('/hello', function() {
 //     return response('<h1>Hello World</h1>', 200)
@@ -45,3 +45,7 @@ Route::get('/sample', function () {
 // Route::get('/search', function(Request $request) {
 //     ddd($request);
 // });
+
+Route::get('/{any}', function() {
+    return view('app');
+})->where('any', '.*');

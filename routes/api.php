@@ -14,28 +14,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', function() {
-    return response() ->json(
-        ['posts' => [
-            [
-                'id' => 1,
-                'title' => 'First Post',
-                'body' => 'This is the first post'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Second Post',
-                'body' => 'This is the second post'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Third Post',
-                'body' => 'This is the third post'
-            ]
-            ]
-        ]);
-});
+// Route::get('/posts', function() {
+//     return response() ->json(
+//         ['posts' => [
+//             [
+//                 'id' => 1,
+//                 'title' => 'First Post',
+//                 'body' => 'This is the first post'
+//             ],
+//             [
+//                 'id' => 2,
+//                 'title' => 'Second Post',
+//                 'body' => 'This is the second post'
+//             ],
+//             [
+//                 'id' => 3,
+//                 'title' => 'Third Post',
+//                 'body' => 'This is the third post'
+//             ]
+//             ]
+//         ]);
+// });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
