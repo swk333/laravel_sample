@@ -7,7 +7,7 @@
       <div
           class="absolute top-0 left-0 w-full h-full opacity-10 bg-no-repeat bg-center"
       ></div>
-
+        
       <div class="z-10">
           <h1 class="text-6xl font-bold uppercase text-white">
               Lara<span class="text-black">Gigs</span>
@@ -53,8 +53,12 @@
       <div
           class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4"
       >
+
           <!-- Item 1 -->
-          <div class="bg-gray-50 border border-gray-200 rounded p-6">
+
+
+          <div v-for="(listing, index) in listings" :key="index" class="bg-gray-50 border border-gray-200 rounded p-6">
+            <button class="bg-blue-500 font-bold py-2 px-4 rounded">Click Me!</button>
               <div class="flex">
                   <img
                       class="hidden w-48 mr-6 md:block"
@@ -63,218 +67,52 @@
                   />
                   <div>
                       <h3 class="text-2xl">
-                        <router-link v-bind:to="{name: 'listings.show', params: {id: 1}}">Senior Laravel Developer</router-link>
+                        <router-link v-bind:to="{name: 'listings.show', params: {id: 1}}">{{ listing.title  }}</router-link>
                           <a href="show.html"></a>
                       </h3>
-                      <div class="text-xl font-bold mb-4">Acme Corp</div>
+                      <div class="text-xl font-bold mb-4">{{ listing.company }}</div>
                       <ul class="flex">
                           <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                            v-for="(tag, index) in splitTags(listing.tags)" :key="index"
+                            class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
                           >
-                              <a href="#">Laravel</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">API</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Backend</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Vue</a>
+                              <a href="#">{{ tag }}</a>
                           </li>
                       </ul>
                       <div class="text-lg mt-4">
-                          <i class="fa-solid fa-location-dot"></i> Boston,
-                          MA
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!-- Item 2 -->
-          <div class="bg-gray-50 border border-gray-200 rounded p-6">
-              <div class="flex">
-                  <img
-                      class="hidden w-48 mr-6 md:block"
-                      src="images/stark.png"
-                      alt=""
-                  />
-                  <div>
-                      <h3 class="text-2xl">
-                          <a href="show.html">Full-Stack Engineer</a>
-                      </h3>
-                      <div class="text-xl font-bold mb-4">
-                          Stark Industries
-                      </div>
-                      <ul class="flex">
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Laravel</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">API</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Backend</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Vue</a>
-                          </li>
-                      </ul>
-                      <div class="text-lg mt-4">
-                          <i class="fa-solid fa-location-dot"></i>
-                          Lawrence, MA
+                          <i class="fa-solid fa-location-dot"></i> 
+                          {{ listing.location }}
                       </div>
                   </div>
               </div>
           </div>
 
-          <!-- Item 3 -->
-          <div class="bg-gray-50 border border-gray-200 rounded p-6">
-              <div class="flex">
-                  <img
-                      class="hidden w-48 mr-6 md:block"
-                      src="images/wayne.png"
-                      alt=""
-                  />
-                  <div>
-                      <h3 class="text-2xl">
-                          <a href="show.html">Laravel Developer</a>
-                      </h3>
-                      <div class="text-xl font-bold mb-4">
-                          Wayne Enterprises
-                      </div>
-                      <ul class="flex">
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Laravel</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">API</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Backend</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Vue</a>
-                          </li>
-                      </ul>
-                      <div class="text-lg mt-4">
-                          <i class="fa-solid fa-location-dot"></i> Newark,
-                          NJ
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Item 4 -->
-          <div class="bg-gray-50 border border-gray-200 rounded p-6">
-              <div class="flex">
-                  <img
-                      class="hidden w-48 mr-6 md:block"
-                      src="images/skynet.png"
-                      alt=""
-                  />
-                  <div>
-                      <h3 class="text-2xl">
-                          <a href="show.html">Backend Laravel Dev</a>
-                      </h3>
-                      <div class="text-xl font-bold mb-4">
-                          Skynet Systems
-                      </div>
-                      <ul class="flex">
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              Laravel
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              API
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              Backend
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              Vue
-                          </li>
-                      </ul>
-                      <div class="text-lg mt-4">
-                          <i class="fa-solid fa-location-dot"></i>
-                          Daytona, FL
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Item 5 -->
-          <div class="bg-gray-50 border border-gray-200 rounded p-6">
-              <div class="flex">
-                  <img
-                      class="hidden w-48 mr-6 md:block"
-                      src="images/wonka.png"
-                      alt=""
-                  />
-                  <div>
-                      <h3 class="text-2xl">
-                          <a href="show.html">Junior Developer</a>
-                      </h3>
-                      <div class="text-xl font-bold mb-4">
-                          Wonka Industries
-                      </div>
-                      <ul class="flex">
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Laravel</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">API</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Backend</a>
-                          </li>
-                          <li
-                              class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                          >
-                              <a href="#">Vue</a>
-                          </li>
-                      </ul>
-                      <div class="text-lg mt-4">
-                          <i class="fa-solid fa-location-dot"></i> San
-                          Francisco, CA
-                      </div>
-                  </div>
-              </div>
-          </div>
       </div>
   </main>
 </template>
+
+<script>
+import axios from 'axios'
+
+    export default {
+        data: function() {
+            return {
+                listings: []
+            }
+        },
+        methods: {
+            getTasks() {
+                axios.get('/api/listings')
+                .then((res) => {
+                    this.listings = res.data;
+                });
+            },
+            splitTags: function(tags) {
+                return tags.split(',');
+            }
+        },
+        mounted() {
+            this.getTasks();
+        }
+    }
+</script>
