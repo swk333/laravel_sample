@@ -1,30 +1,6 @@
 <template>
         <main>
-            <!-- Search -->
-            <form action="">
-                <div class="relative border-2 border-gray-100 m-4 rounded-lg">
-                    <div class="absolute top-4 left-3">
-                        <i
-                            class="fa fa-search text-gray-400 z-20 hover:text-gray-500"
-                        ></i>
-                    </div>
-                    <input
-                        type="text"
-                        name="search"
-                        class="h-14 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
-                        placeholder="Search Laravel Gigs..."
-                    />
-                    <div class="absolute top-2 right-2">
-                        <button
-                            type="submit"
-                            class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600"
-                        >
-                            Search
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <a href="index.html" class="inline-block text-black ml-4 mb-4"
+            <a href="/listings" class="inline-block text-black ml-4 mb-4"
                 ><i class="fa-solid fa-arrow-left"></i> Back
             </a>
             <div class="mx-4">
@@ -38,32 +14,18 @@
                             alt=""
                         />
 
-                        <h3 class="text-2xl mb-2">Senior Laravel Developer</h3>
+                        <h3 class="text-2xl mb-2">{{ listing.title }}</h3>
                         <div class="text-xl font-bold mb-4">Acme Corp</div>
                         <ul class="flex">
-                            <li
+                            <li 
+                                v-for="(tag, index) in listing.tags" :key="index"
                                 class="bg-black text-white rounded-xl px-3 py-1 mr-2"
                             >
-                                <a href="#">Laravel</a>
-                            </li>
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="#">API</a>
-                            </li>
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="#">Backend</a>
-                            </li>
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="#">Vue</a>
+                                <a href="#">{{ tag }}</a>
                             </li>
                         </ul>
                         <div class="text-lg my-4">
-                            <i class="fa-solid fa-location-dot"></i> Daytona, FL
+                            <i class="fa-solid fa-location-dot"></i> {{ listing.location }}
                         </div>
                         <div class="border border-gray-200 w-full mb-6"></div>
                         <div>
@@ -72,31 +34,18 @@
                             </h3>
                             <div class="text-lg space-y-6">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Eligendi non reprehenderit
-                                    facilis architecto autem quam
-                                    necessitatibus, odit quod, repellendus
-                                    voluptate cum. Necessitatibus a id tenetur.
-                                    Error numquam at modi quaerat.
-                                </p>
-                                <p>
-                                    Lorem, ipsum dolor sit amet consectetur
-                                    adipisicing elit. Quaerat praesentium eos
-                                    consequuntur ex voluptatum necessitatibus
-                                    odio quos cupiditate iste similique rem in,
-                                    voluptates quod maxime animi veritatis illum
-                                    quo sapiente.
+                                   {{listing.description}}
                                 </p>
 
                                 <a
-                                    href="mailto:test@test.com"
+                                    :href="listing.email"
                                     class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"
                                     ><i class="fa-solid fa-envelope"></i>
                                     Contact Employer</a
                                 >
 
                                 <a
-                                    href="https://test.com"
+                                    :href="listing.website"
                                     target="_blank"
                                     class="block bg-black text-white py-2 rounded-xl hover:opacity-80"
                                     ><i class="fa-solid fa-globe"></i> Visit
@@ -110,3 +59,29 @@
         </main>
 </template>
 
+<script>
+import axios from 'axios'
+
+    export default {
+        props: {
+            id: String
+        },
+        data: function() {
+            return {
+                listing: {}
+            }
+        },
+        methods: {
+            getListing() {
+                axios.get('/api/listings/' + this.id)
+                .then((res) => {
+                    this.listing = res.data;
+                });
+            },
+        },
+        mounted() {
+            this.getListing();
+        }
+    }
+
+</script>

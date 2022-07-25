@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\HTTP\Controllers\ListingController;
+use App\HTTP\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,6 @@ use App\HTTP\Controllers\ListingController;
 
 Route::get('/listings', [ListingController::class, 'index']);
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+ 
+Route::post('/register', [AuthController::class, 'register']);

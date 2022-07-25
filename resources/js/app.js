@@ -10,6 +10,7 @@ import Listings from './components/Listings.vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Listing from './components/Listing.vue';
+import Register from './components/Register.vue';
 
 window.Vue = require('vue').default;
 
@@ -32,6 +33,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('navigation', Navigation);
 Vue.component('listings', Listings);
 Vue.component('listing', Listing);
+Vue.component('register', Register);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -51,6 +53,11 @@ Vue.component('listing', Listing);
             path: '/listings/:id',
             name: 'listings.show',
             component: Listing,
+            props: true,
+        },        {
+            path: '/register',
+            name: 'register',
+            component: Register,
         },
     ]
 })

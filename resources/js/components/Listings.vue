@@ -5,12 +5,12 @@
       class="relative h-72 bg-laravel flex flex-col justify-center align-center text-center space-y-4 mb-4"
   >
       <div
-          class="absolute top-0 left-0 w-full h-full opacity-10 bg-no-repeat bg-center"
+          class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center bg-red-700"
       ></div>
         
       <div class="z-10">
           <h1 class="text-6xl font-bold uppercase text-white">
-              Lara<span class="text-black">Gigs</span>
+              Youtube<span class="text-black">Finder</span>
           </h1>
           <p class="text-2xl text-gray-200 font-bold my-4">
               Find or post Laravel jobs & projects
@@ -54,11 +54,9 @@
           class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4"
       >
 
-          <!-- Item 1 -->
-
+          <!-- Item  -->
 
           <div v-for="(listing, index) in listings" :key="index" class="bg-gray-50 border border-gray-200 rounded p-6">
-            <button class="bg-blue-500 font-bold py-2 px-4 rounded">Click Me!</button>
               <div class="flex">
                   <img
                       class="hidden w-48 mr-6 md:block"
@@ -67,13 +65,13 @@
                   />
                   <div>
                       <h3 class="text-2xl">
-                        <router-link v-bind:to="{name: 'listings.show', params: {id: 1}}">{{ listing.title  }}</router-link>
-                          <a href="show.html"></a>
+                        <router-link v-bind:to="{name: 'listings.show', params: {id: listing.id}}">{{ listing.title  }}</router-link>
+                          <a :href="'/listing/'+listing.id"></a>
                       </h3>
                       <div class="text-xl font-bold mb-4">{{ listing.company }}</div>
                       <ul class="flex">
                           <li
-                            v-for="(tag, index) in splitTags(listing.tags)" :key="index"
+                            v-for="(tag, index) in listing.tags" :key="index"
                             class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
                           >
                               <a href="#">{{ tag }}</a>
@@ -107,9 +105,6 @@ import axios from 'axios'
                     this.listings = res.data;
                 });
             },
-            splitTags: function(tags) {
-                return tags.split(',');
-            }
         },
         mounted() {
             this.getTasks();
