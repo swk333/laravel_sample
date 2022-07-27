@@ -16,10 +16,9 @@
               Find or post Laravel jobs & projects
           </p>
           <div>
-              <a
-                  href="register.html"
-                  class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black"
-                  >Sign Up to List a Gig</a
+              <router-link to="/register"
+                class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black"
+                  >Sign Up to List a Gig</router-link>
               >
           </div>
       </div>
@@ -55,7 +54,7 @@
       >
 
           <!-- Item  -->
-
+        
           <div v-for="(listing, index) in listings" :key="index" class="bg-gray-50 border border-gray-200 rounded p-6">
               <div class="flex">
                   <img

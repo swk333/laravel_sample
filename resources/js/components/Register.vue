@@ -1,8 +1,8 @@
 <template>
   <main>
-    {{ user }}
+    {{ name }}
+    {{ email }}
       <div class="mx-4">
-        <button v-on:click="login">login</button>
           <div
               class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24"
           >
@@ -13,12 +13,13 @@
                   <p class="mb-4">Create an account to post gigs</p>
               </header>
 
-              <form action="">
+              <form @submit.prevent @submit="onSubmit">
                   <div class="mb-6">
                       <label for="name" class="inline-block text-lg mb-2">
                           Name
                       </label>
                       <input
+                          v-model="name"
                           type="text"
                           class="border border-gray-200 rounded p-2 w-full"
                           name="name"
@@ -30,6 +31,7 @@
                           >Email</label
                       >
                       <input
+                          v-model="email"
                           type="email"
                           class="border border-gray-200 rounded p-2 w-full"
                           name="email"
@@ -48,6 +50,7 @@
                           Password
                       </label>
                       <input
+                          v-model="password"
                           type="password"
                           class="border border-gray-200 rounded p-2 w-full"
                           name="password"
@@ -62,6 +65,7 @@
                           Confirm Password
                       </label>
                       <input
+                          v-model="password_confirmation"
                           type="password"
                           class="border border-gray-200 rounded p-2 w-full"
                           name="password2"
@@ -97,19 +101,23 @@ import axios from 'axios'
 export default {
   data: function() {
     return {
-      user: "",
+      name: "",
+      email: "",
+      password: "",
+      password_confirmation: ""
     }
   },
   methods: {
-    login() {
+    onSubmit() {
+
         axios.get("/sanctum/csrf-cookie").then((response) => {
             axios.post('/api/register', {
-            name: 'sawako',
-            email: 'test8@gmail.com',
-            password: '1234',
-            password_confirmation: '1234'
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            password_confirmation: this.password_confirmation
             }).then((res) => {
-            this.user = res.data.user.name;
+                this.$router.push('/');
             })
         })
     }

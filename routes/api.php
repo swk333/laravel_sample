@@ -38,13 +38,17 @@ use App\HTTP\Controllers\AuthController;
 //         ]);
 // });
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 
 Route::get('/listings', [ListingController::class, 'index']);
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
- 
+
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->group(function() {
+  Route::get('/edit', function() {
+    return 'login user';
+  });
+});
